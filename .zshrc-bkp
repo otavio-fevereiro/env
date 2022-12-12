@@ -1,0 +1,15 @@
+
+
+# {mark} START IT-ENG JAMF SETUP ZSHRC
+source $HOME/.nurc
+export NU_HOME="$HOME/dev/nu"
+export GOPATH="${NU_HOME}/go"
+export PATH="$GOPATH/bin:${PATH}"
+export MONOREPO_ROOT="$NU_HOME/mini-meta-repo"
+export PATH="$PATH:$MONOREPO_ROOT/monocli/bin"
+export FLUTTER_ROOT="$HOME/sdk-flutter/bin"
+export PATH="$PATH:$FLUTTER_ROOT"
+eval "$(rbenv init -)"
+# {mark} END IT-ENG JAMF SETUP ZSHRC
+
+export PATH="/opt/homebrew/bin:$PATH"

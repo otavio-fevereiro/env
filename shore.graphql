@@ -1,0 +1,80 @@
+{
+  person(customerId: "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f") {
+    multiScreen(id: "tabbed") {
+      ... on TabbedScreen {
+        tabs {
+          id
+          contentWidgets {
+            __typename
+            
+            ... on WithId {
+              id
+            }
+            
+            ... on ActionRowWidget {
+              id
+              
+              screenAction{
+                __typename
+                ... on Action {
+                  href
+                }
+              }
+            }
+            ... on HeaderWidget {
+              id
+            }
+            ... on ReadOnlyRowWidget {
+              id
+            }
+            ... on BalanceContentWidget {
+              id
+              balance{
+                text{
+                  rosettaKey
+                  interpolationVariables{
+                    key
+                    value
+                  }
+                }
+              }
+              action {
+                href
+              }
+            }
+            ... on HorizontalListWidget {
+              id
+              items {
+                __typename
+                ... on WithId {
+                  id
+                }
+                
+              }
+            }
+
+            ... on ScreenPillWidget {
+              id
+            }
+            ... on TextContentWidget{
+              id
+            }
+            ... on BDCContentWidget {
+              id
+              exprId
+              provider
+      
+            }
+            ... on BDCBinaryWidget {
+              id
+              exprId
+              provider
+              base64Expression
+            }
+          
+          }
+        }
+      }
+    }
+  }
+}
