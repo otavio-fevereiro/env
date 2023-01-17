@@ -7,8 +7,9 @@ export GOPATH="${NU_HOME}/go"
 export PATH="$GOPATH/bin:${PATH}"
 export MONOREPO_ROOT="$NU_HOME/mini-meta-repo"
 export PATH="$PATH:$MONOREPO_ROOT/monocli/bin"
-export FLUTTER_ROOT="$HOME/sdk-flutter/bin"
-export PATH="$PATH:$FLUTTER_ROOT"
+export FLUTTER_ROOT="$HOME/sdk-flutter/"
+export PATH="$PATH:$FLUTTER_ROOT/bin"
+export PATH="$PATH:$HOME/.pub-cache/bin"
 eval "$(rbenv init -)"
 # {mark} END IT-ENG JAMF SETUP ZSHRC
 
