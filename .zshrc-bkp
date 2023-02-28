@@ -23,6 +23,7 @@ alias flutter-d-s="open -a Terminal $ENV/stormguild-mock.sh &&
                    open -a Terminal $ENV/flutter-desktop.sh"
 alias cid="nu cus cpf 39570682825"
 alias update-credentials="source $ENV/update-credentials.sh"
+alias git-commit-empty="git commit --allow-empty -m \"Empty commit\""
 
 
 export PATH="/opt/homebrew/bin:$PATH"
