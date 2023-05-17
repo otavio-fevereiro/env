@@ -1,0 +1,27 @@
+{
+    "person_pin": "1111",
+    "person_password": "12345678",
+    "company_pin": "1111",
+    "person_customer_id": "6462861e-28ff-46ba-9839-5e7fd3f4c481",
+    "company_password": "12345678",
+    "company_tax_id": "29671764321310",
+    "person_tax_id": "86530871500",
+    "savings_account": {
+      "id": "64628624-479a-4c40-a94f-25f81a338326",
+      "customer_id": "6462861e-28ff-46ba-9839-5e7fd3f4c481",
+      "status": "active",
+      "created_at": "2023-05-15T19:21:08.510",
+      "verified_at": "2023-05-15T19:21:08.673",
+      "bank_account": {
+        "bank": {
+          "number": "0260",
+          "name": "Nu Pagamentos S.A. - Instituição de Pagamento"
+        },
+        "branch": 1,
+        "number": 15126967,
+        "check_digit": 7
+      }
+    },
+    "company_customer_id": "6462862a-efdc-4722-93e1-368aa9fe819a"
+  }
+  

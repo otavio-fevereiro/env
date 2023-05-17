@@ -1,0 +1,26 @@
+[{"widget-id":           "NOW_TEST_1",
+ "version":             "0.0.0",
+ "accessibility-label": {"rosetta-key": "key1", "interpolation-variables":{}},
+ "description":         {"rosetta-key": "key1", "interpolation-variables":{}},
+ "icon":                {"rosetta-key": "icon1", "blur-hash": "LIF$MOwPG{S]~jWTJDodUPSwZosX"},
+ "action":              {"href": "nuapp://bdc/action1", "analytics-properties":{}, "refreshable": "false"}}]
+
+
+ [{"widget-id":         "NOW_FRAUD_TRANSACTIONAL_SUSPICIUS_TRANSACTION_CARD_BLOCKED",
+ "version":             "0.0.0",
+ "accessibility-label": {"rosetta-key": "shell.content_widgets.fraud_transactional.suspicius_transaction_card_blocked.description", "interpolation-variables":{}},
+ "description":         {"rosetta-key": "shell.content_widgets.fraud_transactional.suspicius_transaction_card_blocked.description", "interpolation-variables":{}},
+ "icon":                {"rosetta-key": "shell.content_widgets.fraud_transactional.suspicius_transaction_card_blocked.icon", "blur-hash": "LIF$MOwPG{S]~jWTJDodUPSwZosX"},
+ "action":              {"href": "nuapp://bdc/lagoon/expr/now-onboarding", "analytics-properties":{}, "refreshable": "false"}}]
+
+
+
+  :id                  (str "TEST_" (:id now-use-case))
+                    :template-type       :icon-card-widget
+                    :accessibility-label {:rosetta-key (accessibility-label-key now-use-case) :interpolation-variables (interpolation-variables now-use-case)}
+                    :description         {:rosetta-key (:description-key now-use-case) :interpolation-variables (interpolation-variables now-use-case)}
+                    :icon                {:rosetta-key (:icon-key now-use-case)}
+                    :action              {:href "nuapp://bdc/lagoon/expr/now-onboarding" :analytics-properties {}}
+                    :priority            (+ 100 index)
+                    :section             :now
+                    :token-theme         :alternate}
