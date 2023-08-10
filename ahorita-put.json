@@ -12,11 +12,8 @@
 
 
 
- PUT /api/customers/:id/widget-instances
-    - Retornar instance-id cadastrados
- PUT /api/customers/:id/instance/:instance-id/dismiss
-    - dismiss retornar 404 se nao existir customer ou instance-id
-    - trocar instace da url para o plural
 
-- Cria documentação no coppolla com exemplos de schema
-- Versionamento de api com load-balanace?
+ {"customer-id": "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f",
+  "template-name": "teste-otavio-ahorita",
+  "max-deliver-date": "2024-08-01T12:33:53.475Z",
+  "variables": {"name" : "ahorita"}}

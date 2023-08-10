@@ -1,10 +1,8 @@
-
-
 # {mark} START IT-ENG JAMF SETUP ZSHRC
 source $HOME/.nurc
 export NU_HOME="$HOME/dev/nu"
-export MMR="$NU_HOME/dev/nu/mini-meta-repo"
-export ENV="$NU_HOME/dev/nu/env"
+export MMR="$NU_HOME/mini-meta-repo"
+export ENV="$NU_HOME/env"
 export GOPATH="${NU_HOME}/go"
 export PATH="$GOPATH/bin:${PATH}"
 export MONOREPO_ROOT="$NU_HOME/mini-meta-repo"
