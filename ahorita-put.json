@@ -6,14 +6,42 @@
  "icon":                {"rosetta-key": "icon1", "blur-hash": "LIF$MOwPG{S]~jWTJDodUPSwZosX"},
  "expiration-time":     {"days": 30}}
 
- {"widget-id": "NOW_TEST_1",
- "version":      "0.0.0",
- "action":     {"href": "nuapp://bdc/lagoon/expr/now-onboarding", "analytics-properties":{}, "refreshable": "false"}}
 
+ {"widget-id": "NOW_AHORITA_TEST_ONE",
+ "version":      "1.0.0",
+ "customer-id": "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f",
+ "variables": [{"value-teste": "SEU NOME"}],
+ "action":     {"href": "nuapp://bdc/lagoon/expr/now-onboarding", 
+                "analytics-properties":{"key": "value"}, 
+                "refreshable": "false"}}
+
+
+
+  {:widget-id   "NOW_AHORITA_TEST_ONE"
+   :version     "1.0.0"
+   :customer-id "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
+   :variables   {"value-teste" "SEU NOME"
+                 "value_teste" "OUTRO NOME"}
+   :action      {:href "nuapp://bdc/lagoon/expr/now-onboarding"
+                 :analytics-properties {"key" "value"} 
+                 :refreshable false}}
 
 
 
  {"customer-id": "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f",
-  "template-name": "teste-otavio-ahorita",
+  "template-name": "ahorita-test-highlights",
   "max-deliver-date": "2024-08-01T12:33:53.475Z",
-  "variables": {"name" : "ahorita"}}
+  "variables": {"service_name" : "Ahorita"}}
+
+
+  {:customer-id "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
+   :template-name "ahorita-test-highlights"
+   :max-deliver-date "2030-08-01T12:33:53.475Z"
+   :variables: {"service_name" "Ahorita"
+                "data"         "Otavio"}}
+
+  (update-keys variables #(-> % name (string/replace #"-" "_")))
+
+  (s/defn  ^:private update-string>key :- {s/Keyword s/Str}
+  [m :- {s/Str s/Str}]
+  (update-keys m #(-> % (string/replace  #"_" "-") keyword)))
