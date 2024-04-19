@@ -1,47 +1,83 @@
-{"widget-id":          "NOW_TEST_1",
- "template-type":       "icon_card_widget",
- "version":             "0.0.0",
- "accessibility-label": "key1",
- "description":         "key1",
- "icon":                {"rosetta-key": "icon1", "blur-hash": "LIF$MOwPG{S]~jWTJDodUPSwZosX"},
- "expiration-time":     {"days": 30}}
+{
+    "description": "shell.content_widgets.ahorita.two.now.description",
+    "category": "CONTINUE",
+    "accessibility-label": "shell.content_widgets.ahorita.two.now.accessibility_label",
+    "template-type": "icon_card_widget",
+    "expiration-time": {
+      "days": 30
+    },
+    "icon": {
+      "rosetta-key": "shell.content_widgets.now_section.now_onboarding_widget_new.icon"
+    },
+    "sub-category": "DEEP_ENGAGEMENT",
+    "version": "1.0.0"
+ }
 
 
- {"widget-id": "NOW_AHORITA_TEST_ONE",
+
+ {"widget-id": "ICON_CARD_TEST_WIDGET",
  "version":      "1.0.0",
  "customer-id": "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f",
- "variables": [{"value-teste": "SEU NOME"}],
+ "variables": {"value": "SEU NOME"},
  "action":     {"href": "nuapp://bdc/lagoon/expr/now-onboarding", 
-                "analytics-properties":{"key": "value"}, 
+                "analytics-properties":{}, 
                 "refreshable": "false"}}
 
 
+{:widget-id "NOW_ICON_CARD_WIDGET_INSIGHT_INSIGHT1"
+:version "1.0.0"
+:customer-id "588d7980-92cf-4376-926d-574b9e6511ca"
+:variables {"spent_amount" "444"}
+:action {:href "nuapp://bdc/lagoon/expr/now-onboarding"
+:analytics-properties {"key" "value"}}}
 
-  {:widget-id   "NOW_AHORITA_TEST_ONE"
+{:widget-id "CXP_PHONE_OUTBOUND_CALL_STATUS"
+ :version "1.0.0"
+ :customer-id "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
+ :variables {}
+ :action {:href "nuapp://bdc/lagoon/expr/now-onboarding"
+ :analytics-properties {}}}
+
+
+  {:widget-id   "ICON_CARD_TEST_WIDGET"
    :version     "1.0.0"
    :customer-id "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
-   :variables   {"value-teste" "SEU NOME"
-                 "value_teste" "OUTRO NOME"}
+   :variables   {"value" "SEU NOME"}
    :action      {:href "nuapp://bdc/lagoon/expr/now-onboarding"
-                 :analytics-properties {"key" "value"} 
-                 :refreshable false}}
+                 :analytics-properties {"key" "value"}}}
 
 
 
  {"customer-id": "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f",
   "template-name": "ahorita-test-highlights",
   "max-deliver-date": "2024-08-01T12:33:53.475Z",
-  "variables": {"service_name" : "Ahorita"}}
+  "variables": {"service_name" : "111",
+                "data" : "111"}}
+
+{"customer-id": "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f",
+"template-name": "ahorita-test-highlights2",
+"max-deliver-date": "2024-08-01T12:33:53.475Z",
+"variables": {"service_name" : "222",
+              "data" : "222"}}
+
+{"customer-id": "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f",
+"template-name": "ahorita-test-highlights-3",
+"max-deliver-date": "2024-08-01T12:33:53.475Z",
+"variables": {"service_name" : "333",
+              "data" : "333"}}
 
 
-  {:customer-id "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
-   :template-name "ahorita-test-highlights"
-   :max-deliver-date "2030-08-01T12:33:53.475Z"
-   :variables: {"service_name" "Ahorita"
-                "data"         "Otavio"}}
+{:customer-id "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
+ :template-name "ahorita-test-highlights"
+ :max-deliver-date "2030-08-01T12:33:53.475Z"
+ :variables: {}}
 
-  (update-keys variables #(-> % name (string/replace #"-" "_")))
+{:customer-id "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
+ :template-name "ahorita-test-highlights2"
+ :max-deliver-date "2030-08-01T12:33:53.475Z"
+ :variables: {"service_name" "222"}}
 
-  (s/defn  ^:private update-string>key :- {s/Keyword s/Str}
-  [m :- {s/Str s/Str}]
-  (update-keys m #(-> % (string/replace  #"_" "-") keyword)))
+ {:customer-id "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
+  :template-name "ahorita-test-highlights-3"
+  :max-deliver-date "2030-08-01T12:33:53.475Z"
+  :variables: {"service_name" "333"}}
