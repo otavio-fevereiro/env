@@ -1,0 +1,26 @@
+//K8s
+nu k8s get pods s8 ahorita --env prod
+
+nu k8s keda configure s8 ahorita --min-size 4 --max-size 8
+
+nu on-shards run -- k8s keda configure %  ahorita  --min-size 4 --max-size 8 -y
+
+nu k8s configure s0
+
+nu on-shards run -- k8s configure %
+
+//KAFKA
+nu kafka topic describe S2 CASHFLOW.CREATE-NOW-INSTANCE --env prod
+nu kafka topic describe S2 CASHFLOW.REMOVE-NOW-INSTANCE --env prod
+
+nu kafka topic describe S2 CASHFLOW.CREATE-HIGHLIGHTS-COMMUNICATION --env prod
+nu kafka topic describe S2 CASHFLOW.REMOVE-HIGHLIGHTS-COMMUNICATION --env prod
+
+nu kafka topic describe S2 IN-APP-EXPERIENCES.HIGHLIGHTS.DELIVER --env pro
+
+kafka topic alter global ${TOPIC.NAME}  --env prod --partitions 12
+
+nu on-shards run -- kafka topic alter global ${TOPIC.NAME}  --env prod --partitions 12 -y
+
+
+nu aws shared-role-credentials refresh --account-alias=br --drop-policies co-write-nu-attachments,data-platform-restore-object,databricks-br-general,databricks-co-general,databricks-mx-general,torneirinha-user,etl-gremlins-staging,hermes-project,nu-audit-documents

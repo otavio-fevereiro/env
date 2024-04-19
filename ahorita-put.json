@@ -61,14 +61,13 @@
               "data" : "222"}}
 
 {"customer-id": "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f",
-"template-name": "ahorita-test-highlights-3",
+"template-name": "teste-otavio",
 "max-deliver-date": "2024-08-01T12:33:53.475Z",
-"variables": {"service_name" : "333",
-              "data" : "333"}}
+"variables": {}}
 
 
 {:customer-id "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
- :template-name "ahorita-test-highlights"
+ :template-name "teste-otavio"
  :max-deliver-date "2030-08-01T12:33:53.475Z"
  :variables: {}}
 
@@ -81,3 +80,18 @@
   :template-name "ahorita-test-highlights-3"
   :max-deliver-date "2030-08-01T12:33:53.475Z"
   :variables: {"service_name" "333"}}
+
+
+
+{:customer-id "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
+ :app-experience
+ {:name       "app-experience"
+  :experiment "experiment-app-experience"
+  :slots
+  [{:position 1
+    :content
+    [{:template   "template-1"
+      :end-date   "2030-08-01T12:33:53.475Z"}
+     {:template   "template-2"
+      :experiment "experiment-2"
+      :end-date "2030-08-01T12:33:53.475Z"}]}]}}
