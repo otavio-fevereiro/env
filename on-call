@@ -1,16 +1,28 @@
 //K8s
 nu k8s get pods s8 ahorita --env prod
 
-nu k8s keda configure s8 ahorita --min-size 4 --max-size 8
+nu k8s keda configure s18 marca-texto --min-size 8 --max-size 8 --iam
 
-nu on-shards run -- k8s keda configure %  ahorita  --min-size 4 --max-size 8 -y
+nu on-shards run -- k8s keda configure % marca-texto  --min-size 3 --max-size 8 -y
+
+nu k8s change-resources --stack-id green s15 marca-texto --limit-cpu 6 --request-cpu 6  --country br
+nu on-shards run -- k8s change-resources --stack-id green % marca-texto --limit-cpu 6 --request-cpu 6 --country br -y
+
+
 
 nu k8s configure s0
 
-nu on-shards run -- k8s configure %
+nu k8s configure s18 --country br --env prod --okta        
+nu on-shards run -- k8s configure % --okta 
+
+nu k8s cycle s6 marca-texto --env prod
+
+nu k8s ops-health marca-texto s6
+nu-br ser curl GET s6 marca-texto --env prod /ops/health
+
 
 //KAFKA
-nu kafka topic describe S2 CASHFLOW.CREATE-NOW-INSTANCE --env prod
+nu kafka topic describe S2 CASnu k8s ops-health FLOW.CREATE-NOW-INSTANCE --env prod
 nu kafka topic describe S2 CASHFLOW.REMOVE-NOW-INSTANCE --env prod
 
 nu kafka topic describe S2 CASHFLOW.CREATE-HIGHLIGHTS-COMMUNICATION --env prod
@@ -24,3 +36,15 @@ nu on-shards run -- kafka topic alter global ${TOPIC.NAME}  --env prod --partiti
 
 
 nu aws shared-role-credentials refresh --account-alias=br --drop-policies co-write-nu-attachments,data-platform-restore-object,databricks-br-general,databricks-co-general,databricks-mx-general,torneirinha-user,etl-gremlins-staging,hermes-project,nu-audit-documents
+
+
+nu aws shared-role-credentials web-console --account-alias=br-staging
+
+nu-br-staging k8s logs s0 ahorita --pod staging-s0-green-ahorita-deployment-7fb74dc6c7-552sd
+
+nu-br-staging sec iam show  
+nu-br-staging auth get-refresh-token --env staging
+nu aws shared-role-credentials refresh -i
+nu aws credentials refresh --aws-account='br-staging-staging'
+nu aws credentials refresh --aws-account br-staging-staging
+https://nubank.atlassian.net/servicedesk/customer/portal/131/group/679/create/9937

@@ -4,6 +4,7 @@
 nu update
 #nu aws credentials setup
 nu aws credentials refresh
+#nu aws shared-role-credentials refresh --account-alias=br --keep-policies eng,prod-eng
 nu codeartifact login maven
 #nu cert setup --env staging
 #nu cert setup --env prod

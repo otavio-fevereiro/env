@@ -31,9 +31,10 @@
 :action {:href "nuapp://bdc/lagoon/expr/now-onboarding"
 :analytics-properties {"key" "value"}}}
 
-{:widget-id "CXP_PHONE_OUTBOUND_CALL_STATUS"
+{:widget-id "NOW_ICON_CARD_WIDGET_CREDIT_CARD_PTC_MASS_MARKET_V1_GAMIFY_NEW_MISSIONS_AVAILABLE"
  :version "1.0.0"
  :customer-id "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
+ :starts-at "2024-06-25T15:50:00.000Z"
  :variables {}
  :action {:href "nuapp://bdc/lagoon/expr/now-onboarding"
  :analytics-properties {}}}
@@ -67,8 +68,15 @@
 
 
 {:customer-id "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
- :template-name "teste-otavio"
+ :template-name "NOW_ICON_CARD_WIDGET_CREDIT_CARD_PTC_MASS_MARKET_V1_GAMIFY_NEW_MISSIONS_AVAILABLE"
  :max-deliver-date "2030-08-01T12:33:53.475Z"
+ :starts-at "2024-06-25T15:50:00.000Z"
+ :variables: {}}
+
+ {:customer-id "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
+ :template-name "NOW_ICON_CARD_WIDGET_CREDIT_CARD_PTC_MASS_MARKET_V1_GAMIFY_NEW_MISSIONS_AVAILABLE"
+ :max-deliver-date "2030-08-01T12:33:53.475Z"
+ :starts-at "2024-06-25T15:50:00.000Z"
  :variables: {}}
 
 {:customer-id "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
@@ -86,12 +94,74 @@
 {:customer-id "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
  :app-experience
  {:name       "app-experience"
-  :experiment "experiment-app-experience"
+  :experiments ["experiment-app-experience"]
   :slots
   [{:position 1
     :content
     [{:template   "template-1"
+      :start-date "2024-04-24T00:00:00.0Z"
       :end-date   "2030-08-01T12:33:53.475Z"}
      {:template   "template-2"
-      :experiment "experiment-2"
+      :end-date   "2030-08-01T12:33:53.475Z"}]}
+   {:position 2
+    :content
+    [{:template   "template-3"
+      :end-date "2030-08-01T12:33:53.475Z"}]}
+   {:position 3
+    :content
+    [{:template   "teste-4"
       :end-date "2030-08-01T12:33:53.475Z"}]}]}}
+      
+[{:widget-id "template-1" ...}
+ {:widget-id "template-2" ...}
+ {:widget-id "template-3" ...}]
+
+
+ {:customer--id             "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
+   :eligibility-name        "investments-backed-loan"
+   :is-eligible              true
+   :status                   "active"
+   :eligibility-produced-at  "2030-04-24T00:00:00.000Z"
+   :eligibility-expires-at   "2030-04-26T12:33:53.475Z"}
+ 
+
+ {:customer-id "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
+  :app-experience
+  {:name       "app-experience"
+   :experiments ["experiment-app-experience"]
+   :slots
+   [{:position 1
+     :content
+     [{:template   "teste-otavio"
+       :eligibility "fgts-backed-loan"
+       :experiment "home-insurance"
+       :start-date "2024-04-01T12:33:53.475Z"
+       :end-date   "2030-08-01T12:33:53.475Z"}]}
+    {:position 2
+     :content
+     [{:template   "teste-otavio-2"
+       :eligibility "personal-loan"
+       :end-date "2030-08-01T12:33:53.475Z"}]}]}}
+       991484138
+
+
+{:customer-id             "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
+:eligibility-name         "test"
+:is-eligible              false
+:status                   :active
+:produced-at              "2024-07-23T08:00:53.475Z"}
+
+{:customer-id             "5d10a515-8923-4dca-8ba9-00f0085906de"
+:eligibility-name         "home-insurance"
+:is-eligible              true
+:status                   :active
+:produced-at              "2024-07-26T08:00:53.475Z"}
+
+
+enviar activation log
+documentação
+Passagem de conhecimento de oncall
+temos que fechar a porteira do highlights? (alinhar com cashflow)
+
+
+<span class="css-5t1gy9">prod-s0-green-ahorita-deployment-56b95b466d-98gbq</span>
