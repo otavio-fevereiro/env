@@ -1,0 +1,13 @@
+oncall
+
+SPLUNK LOG ERROR
+index=br-prod-$prototype source=$service log_level=ERROR path=$path
+index="br-staging-s0" source="ahorita" level="ERROR"
+
+OPS HEATH
+nu ser ops-health $prototype $service
+nu ser curl GET $prototype $service /ops/health | jq
+
+KUBERNETS
+nu k8s get pods $prototype $service
+nu k8s cycle $prototype $service --env $env --country $country
