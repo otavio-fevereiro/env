@@ -98,18 +98,18 @@
   :slots
   [{:position 1
     :content
-    [{:template   "template-1"
+    [{:template   "teste-otavio"
       :start-date "2024-04-24T00:00:00.0Z"
       :end-date   "2030-08-01T12:33:53.475Z"}
-     {:template   "template-2"
+     {:template   "teste-otavio-2"
       :end-date   "2030-08-01T12:33:53.475Z"}]}
    {:position 2
     :content
-    [{:template   "template-3"
+    [{:template   "teste-otavio-3"
       :end-date "2030-08-01T12:33:53.475Z"}]}
    {:position 3
     :content
-    [{:template   "teste-4"
+    [{:template   "teste-otavio-4"
       :end-date "2030-08-01T12:33:53.475Z"}]}]}}
       
 [{:widget-id "template-1" ...}
@@ -142,7 +142,6 @@
      [{:template   "teste-otavio-2"
        :eligibility "personal-loan"
        :end-date "2030-08-01T12:33:53.475Z"}]}]}}
-       991484138
 
 
 {:customer-id             "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
@@ -155,4 +154,4 @@
 :eligibility-name         "home-insurance"
 :is-eligible              true
 :status                   :active
-:produced-at              "2024-07-26T08:00:53.475Z"}
+:produced-at              "2024-09-24T08:00:53.475Z"}
