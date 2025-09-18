@@ -1,0 +1,154 @@
+ % nu-br-staging k8s get deployment s0 shore
+NAME                                READY   UP-TO-DATE   AVAILABLE   AGE
+staging-s0-green-shore-deployment   0/0     0            0           694d
+otavio.fevereiro@otavio ~ % nu-br-staging k8s describe deployment s0 shore
+Name:                   staging-s0-green-shore-deployment
+Namespace:              default
+CreationTimestamp:      Mon, 14 Aug 2023 15:32:58 -0300
+Labels:                 flock.nu.dev/managed=true
+                        k8slens-edit-resource-version=v1
+                        nubank.com.br/business-unit=experience-plataforms
+                        nubank.com.br/environment=staging
+                        nubank.com.br/git-revision=c236b41267f3ad29bff521c2cfbbdac70064ee7c
+                        nubank.com.br/mtls-enabled=true
+                        nubank.com.br/name=shore
+                        nubank.com.br/operating-cost-center=130026
+                        nubank.com.br/prototype=s0
+                        nubank.com.br/squad=homepage-platform
+                        nubank.com.br/stack-id=green
+                        nubank.com.br/tier=critical
+                        nubank.com.br/version=b5d2d42a4e0bac8431e630cfd3b8c565df79568f
+                        sidecar.istio.io/inject=true
+Annotations:            deployment.kubernetes.io/revision: 1606
+Selector:               nubank.com.br/environment=staging,nubank.com.br/name=shore,nubank.com.br/prototype=s0,nubank.com.br/stack-id=green
+Replicas:               0 desired | 0 updated | 0 total | 0 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  0% max unavailable, 50% max surge
+Pod Template:
+  Labels:           app.kubernetes.io/name=shore
+                    app.kubernetes.io/version=b5d2d42a4e0bac8431e630cfd3b8c565df79568f
+                    nubank.com.br/business-unit=experience-plataforms
+                    nubank.com.br/environment=staging
+                    nubank.com.br/git-revision=c236b41267f3ad29bff521c2cfbbdac70064ee7c
+                    nubank.com.br/infosec-filter=true
+                    nubank.com.br/mtls-enabled=true
+                    nubank.com.br/name=shore
+                    nubank.com.br/operating-cost-center=130026
+                    nubank.com.br/prototype=s0
+                    nubank.com.br/squad=homepage-platform
+                    nubank.com.br/stack-id=green
+                    nubank.com.br/tier=critical
+                    nubank.com.br/version=b5d2d42a4e0bac8431e630cfd3b8c565df79568f
+                    sidecar.istio.io/inject=true
+  Annotations:      iam.amazonaws.com/role: staging/shore/pink/staging-pink-shore-role
+                    kubectl.kubernetes.io/restartedAt: 2024-10-07T19:12:31-07:00
+                    nubank.com.br/last-cycle: 1731680772
+                    nubank.com.br/last-cycle-author: bruno.fonseca2
+                    prometheus.io/alerts:
+                      {:http-error-ratio-above-threshold [{:severity :critical, :threshold 0.01, :min-reqs-per-second-per-path 10}], :istio-sidecar-topping-cpu-...
+                    prometheus.io/path: /ops/prometheus/metrics
+                    prometheus.io/port: 4443
+                    prometheus.io/scrape: true
+                    proxy.istio.io/config:
+                      {"proxyStatsMatcher":{"inclusionRegexps":[".*downstream_cx_destroy.*",".*downstream_cx_http._total.*",".*downstream_cx_idle_timeout.*",".*...
+                    sidecar.istio.io/bootstrapOverride: istio-custom-stats-config
+                    sidecar.istio.io/nativeSidecar: false
+                    traffic.sidecar.istio.io/includeInboundPorts: 8080
+  Service Account:  shore
+  Containers:
+   nu-shore:
+    Image:      193814090748.dkr.ecr.us-east-1.amazonaws.com/nu-shore:b5d2d42a4e0bac8431e630cfd3b8c565df79568f
+    Port:       4445/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     24
+      memory:  20480M
+    Requests:
+      cpu:      12
+      memory:   20480M
+    Liveness:   exec [/bin/sh /opt/deploy/probe.sh] delay=10s timeout=5s period=5s #success=1 #failure=20
+    Readiness:  exec [/bin/sh /opt/deploy/probe.sh] delay=10s timeout=5s period=5s #success=1 #failure=20
+    Startup:    http-get http://:8080/api/version delay=30s timeout=10s period=15s #success=1 #failure=30
+    Environment:
+      NU_KAFKA_STACK_ID:                                                       green
+      NU_TIER:                                                                  (v1:metadata.labels['nubank.com.br/tier'])
+      NU_STACK_ID:                                                             green
+      NU_K8S_SERVICE_INTERNAL_DOMAIN:                                          default.svc.cluster.local
+      NU_OPERATING_COST_CENTER:                                                 (v1:metadata.labels['nubank.com.br/operating-cost-center'])
+      NU_COUNTRY:                                                              br
+      NU_SERVICE_CANONICAL_NAME:                                               shore
+      NU_DOMAIN_NAME:                                                          nustg.com.br
+      NU_PRIVATE_IP:                                                            (v1:status.podIP)
+      NU_ENV_CONFIG:                                                           {"s3-xp-bucket":"nu-xp-br-staging-staging","truststore":["customers","nubanker","nubankers","delegate","service","customer"],"primary_brokers":"staging-s0-green-kafka.nustg.com.br:9092","rds_suffix":"cqzfhg02xd4i.us-east-1.rds.amazonaws.com","crl-mode":"dhi","zk_primary":"staging-s0-zookeeper.nustg.com.br/staging-s0-green","prototype":"s0","xp_list_cache_redis_ssl":false,"prometheus":{"prometheus-ist":{"url":"staging-global-prometheus.ist.nubank.world"},"prometheus-data":{"url":"staging-global-prometheus-data.nustg.com.br"},"pushgateway":{"url":"https://staging-s0-pushgateway.nustg.com.br"},"prometheus":{"url":"staging-s0-prometheus.nustg.com.br"},"metrics-platform-data-account":{"url":"staging-global-vicmetrics-select.nubank.world/select/0/prometheus"},"prometheus-nuinvest":{"url":"prometheus.kube.prod.easynvest.io"},"metrics-platform-ist":{"url":"staging-global-vicmetrics-select.ist.nubank.world/select/0/prometheus"},"prometheus-cicd":{"url":"thanos.nu.workflows.dev"},"metrics-platform":{"url":"staging-s0-vicmetrics-select.nustg.com.br/select/0/prometheus"},"prometheus-data-account":{"url":"staging-global-prometheus.nubank.world"},"thanos":{"url":"staging-s0-thanos-prototyped.nustg.com.br"}},"service-mesh-cross-shard-enabled":["s0","global"],"kafka_clusters":{"kafka":{"primary_brokers":"staging-s0-green-kafka.nustg.com.br:9092"},"br_staging_avalanche_s0":{"primary_brokers":"kafka-avalanche-bootstrap.global.staging-br.isc.nubank.world:9092","flavor":"avalanche"},"br_staging_routing_s0":{"primary_brokers":"kafka-routing-bootstrap.s0.staging-br.isc.nubank.world:9092","flavor":"routing"},"br_staging_gp_s0":{"primary_brokers":"kafka-gp-bootstrap.s0.staging-br.isc.nubank.world:9092","flavor":"gp"}},"rollout-bucket":"nu-rollout-br-staging-staging","providers_cache_redis_host":"staging-1-shoreconte.wipw2x.ng.0001.use1.cache.amazonaws.com","emit-startup-metrics?":true,"crl-concurrency-limit":60,"providers_cache_redis_ssl":false,"xp_list_cache_redis_host":"staging-s0-1-xpfilte.wipw2x.ng.0001.use1.cache.amazonaws.com","token-verifier":"btrl","redis_ssl":false,"shards":{},"tokens-bucket":"nu-keysets-br-staging-staging","ist-blueprint-url":"https://staging-global-blueprint.ist.nubank.world/api","redis_host":"staging-1-shore.wipw2x.ng.0001.use1.cache.amazonaws.com","auth-bucket":"nu-auth-br-staging","pkix-trust-store":"br/customer+delegate+nubanker+service","jetty_configs":{"gzip_check_gz_exists":"false","thread_poll_idle_timeout":"60000","thread_poll_min_threads":"10","mtls_ssl_sts_include_subdomains":"true","gzip_compression_level":"-1","healthcheck_http2_max_concurrent_steams":"128","healthcheck_ssl_sts_include_subdomains":"true","proxy_mtls_ssl_sts_max_age_seconds":"3453600","healthcheck_ssl_sni_host_check":"false","internal_ssl_sni_host_check":"false","mtls_http2_rate_control_max_events_per_second":"20","mtls_http2_max_concurrent_steams":"128","mtls_http2_initial_stream_rec_windown":"524288","healthcheck_http2_rate_control_max_events_per_second":"20","thread_poll_detailed_dump":"false","stop_timeout":"5000","http_config_response_header_size":"20768","proxy_mtls_http2_max_settings_keys":"64","mtls_ssl_sts_max_age_seconds":"3453600","proxy_mtls_http2_max_concurrent_steams":"128","gzip_min_size":"2048","proxy_ssl_sts_include_subdomains":"true","proxy_mtls_ssl_sts_include_subdomains":"true","internal_ssl_sts_max_age_seconds":"3453600","thread_poll_max_threads":"300","proxy_mtls_http2_initial_stream_rec_windown":"524288","proxy_ssl_sts_max_age_seconds":"3453600","healthcheck_http2_initial_stream_rec_windown":"524288","proxy_sni_host_check":"false","thread_poll_reserved_threads":"-1","mtls_http2_max_settings_keys":"64","proxy_mtls_ssl_sni_host_check":"false","healthcheck_http2_initial_session_rec_window":"1048576","mtls_ssl_sni_host_check":"false","stop_timeout_shutdown":"true","http_config_request_header_size":"20768","internal_ssl_sts_include_subdomains":"true","proxy_mtls_http2_initial_session_rec_window":"1048576","healthcheck_http2_max_settings_keys":"64","proxy_mtls_http2_rate_control_max_events_per_second":"20","mtls_http2_initial_session_rec_window":"1048576","healthcheck_ssl_sts_max_age_seconds":"3453600"}}
+      NU_K8S_NAMESPACE:                                                         (v1:metadata.namespace)
+      NU_BUSINESS_UNIT:                                                         (v1:metadata.labels['nubank.com.br/business-unit'])
+      NU_ENV:                                                                  staging
+      NU_PROTOTYPE:                                                            s0
+      NU_SQUAD:                                                                 (v1:metadata.labels['nubank.com.br/squad'])
+      NU_SERVICE:                                                              shore
+      NU_REGION:                                                               us-east-1
+      NU_AWS_ACCOUNT_ALIAS:                                                    br-staging
+      OTEL_INSTRUMENTATION_OPENTELEMETRY_API_ENABLED:                          true
+      OTEL_EXPORTER_OTLP_TRACES_ENDPOINT:                                      http://staging-s0-green-otel-collector-traces-stream.tracing-stream.svc.cluster.local:4318/v1/traces
+      POD_NAME:                                                                 (v1:metadata.name)
+      OTEL_EXPORTER_OTLP_METRICS_ENDPOINT:                                     http://staging-s0-green-otel-collector-metrics.monitoring.svc.cluster.local:4318/v1/metrics
+      NAUVOO_ROLLOUT_BUCKET:                                                   true
+      ENV:                                                                     staging
+      JAVA_OTHERS:                                                             -Ddatomic.metricsCallback=common-datomic.components.datomic/export-peer-metrics -Ddatomic.memcachedAutoDiscovery=true -Dnauvoo.heartbeatDelayCritical=0.7 -Dnauvoo.heartbeatDelayMax=0.9 -XX:+UseG1GC -Djava.locale.providers='COMPAT,JRE,CLDR' -Duser.language=pt -Duser.country=BR -Duser.timezone=America/Sao_Paulo
+      DATOMIC_HINT_TRANSACTIONS_ENABLED:                                       false
+      OTEL_SERVICE_NAME:                                                       shore
+      OTEL_LOGS_EXPORTER:                                                      none
+      OTEL_TRACES_EXPORTER:                                                    otlp
+      OTEL_HOST_IP:                                                             (v1:status.hostIP)
+      VERSION:                                                                 b5d2d42a4e0bac8431e630cfd3b8c565df79568f
+      OTEL_INSTRUMENTATION_OPENTELEMETRY_INSTRUMENTATION_ANNOTATIONS_ENABLED:  true
+      OTEL_PROPAGATORS:                                                        tracecontext,baggage,b3multi
+      OTEL_EXPORTER_OTLP_TRACES_PROTOCOL:                                      http/protobuf
+      OTEL_EXPORTER_OTLP_ENDPOINT:
+      POD_UID:                                                                  (v1:metadata.uid)
+      KAFKA_MULTI_CLUSTER_ENABLED:                                             true
+      JAVA_MEM:                                                                -Xms13811M -Xmx13811M
+      OTEL_RESOURCE_ATTRIBUTES:                                                service.name=shore,service.env=staging,service.instance.id=$(POD_NAME),k8s.pod.uid=$(POD_UID),nu.prototype=s0,nu.aws_account_alias=br-staging,nu.aws_region=us-east-1,nu.country=br,k8s.pod.private_ip=$(NU_PRIVATE_IP),nu.stack_id=green,nu.business_unit=$(NU_BUSINESS_UNIT),nu.operating_cost_center=$(NU_OPERATING_COST_CENTER),nu.squad=$(NU_SQUAD),nu.tier=$(NU_TIER),k8s.namespace=$(NU_K8S_NAMESPACE)
+      ENVIRONMENT:                                                             staging
+      JAEGER_HOST:                                                              (v1:spec.nodeName)
+      OTEL_JAVAAGENT_ENABLED:                                                  true
+      NODE_HOSTNAME:                                                            (v1:spec.nodeName)
+      OTEL_EXPORTER_OTLP_METRICS_PROTOCOL:                                     http/protobuf
+      JETTY_ARGS:                                                              jetty.gzip.includedMethodList=GET,POST,PUT
+      OTEL_INSTRUMENTATION_COMMON_DEFAULT_ENABLED:                             false
+    Mounts:
+      /etc/shore_config.json from shore-nuenv (rw,path="config.json")
+      /mnt/efs/000 from efs-k8s-node-shared (ro)
+      /opt/deploy/WEB-INF/classes/logback.xml from json-logback (rw,path="logback.xml")
+      /var/log/jetty from app-logs (rw)
+      /var/log/shore from app-logs (rw)
+  Volumes:
+   json-logback:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      json-logback
+    Optional:  false
+   app-logs:
+    Type:          HostPath (bare host directory volume)
+    Path:          /tmp
+    HostPathType:  DirectoryOrCreate
+   shore-nuenv:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      shore-nuenv
+    Optional:  false
+   efs-k8s-node-shared:
+    Type:          HostPath (bare host directory volume)
+    Path:          /mnt/efs/000
+    HostPathType:  Directory
+  Node-Selectors:  nubank.com.br/efs-shared-000=true
+                   subnet=staging
+  Tolerations:     nubank.com.br/arm-node=true:NoSchedule
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  staging-s0-green-shore-deployment-9975fd695 (0/0 replicas created), staging-s0-green-shore-deployment-876568477 (0/0 replicas created), staging-s0-green-shore-deployment-5f4b6d97b4 (0/0 replicas created), staging-s0-green-shore-deployment-6d69bf7cfd (0/0 replicas created), staging-s0-green-shore-deployment-6fd9d58997 (0/0 replicas created), staging-s0-green-shore-deployment-5cb57dc4d7 (0/0 replicas created), staging-s0-green-shore-deployment-8ffb4d676 (0/0 replicas created), staging-s0-green-shore-deployment-7d965779b4 (0/0 replicas created), staging-s0-green-shore-deployment-5f9f685c4b (0/0 replicas created), staging-s0-green-shore-deployment-76b74cff65 (0/0 replicas created)
+NewReplicaSet:   staging-s0-green-shore-deployment-79f7448fcb (0/0 replicas created)
+Events:          <none>
+otavio.fevereiro@otavio ~ % 0cfd3b8c565df79568
