@@ -14,6 +14,13 @@
  }
 
 
+ {:widget-id   "now-otavio-test"
+  :version     "1.0.0"
+  :customer-id "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
+  :variables   {"test-2" "Otavio"}}
+
+  
+
 
  {"widget-id": "ICON_CARD_TEST_WIDGET",
  "version":      "1.0.0",
@@ -21,15 +28,14 @@
  "variables": {"value": "SEU NOME"},
  "action":     {"href": "nuapp://bdc/lagoon/expr/now-onboarding", 
                 "analytics-properties":{}, 
-                "refreshable": "false"}}
+                "refreshable": "true"}}
 
 
-{:widget-id "NOW_ICON_CARD_WIDGET_INSIGHT_INSIGHT1"
-:version "1.0.0"
-:customer-id "588d7980-92cf-4376-926d-574b9e6511ca"
-:variables {"spent_amount" "444"}
-:action {:href "nuapp://bdc/lagoon/expr/now-onboarding"
-:analytics-properties {"key" "value"}}}
+                {:widget-id "ICON_CARD_TEST_WIDGET"
+                :version "1.0.0"
+                :customer-id "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
+                :variables {"spent_amount" "444"}
+                :action {:href "nuapp://pix" :analytics-properties {"key" "value"} :refreshable true}}
 
 {:widget-id "NOW_ICON_CARD_WIDGET_CREDIT_CARD_PTC_MASS_MARKET_V1_GAMIFY_NEW_MISSIONS_AVAILABLE"
  :version "1.0.0"
@@ -92,32 +98,53 @@
 
 
 {:customer-id "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
+:app-experience
+{:name       "app-experience"
+ :experiments ["experiment-app-experience"]
+ :slots
+ [{:position 1
+   :content
+   [{:template   "teste-otavio"
+     :start-date "2024-04-24T00:00:00.0Z"
+     :end-date   "2024-11-01T00:00:54.475Z"}]}]}}
+
+
+{:customer-id "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
  :app-experience
  {:name       "app-experience"
   :experiments ["experiment-app-experience"]
   :slots
   [{:position 1
     :content
-    [{:template   "template-1"
+    [{:template   "teste-otavio"
       :start-date "2024-04-24T00:00:00.0Z"
-      :end-date   "2030-08-01T12:33:53.475Z"}
-     {:template   "template-2"
       :end-date   "2030-08-01T12:33:53.475Z"}]}
    {:position 2
     :content
-    [{:template   "template-3"
+    [{:template   "teste-otavio-3"
       :end-date "2030-08-01T12:33:53.475Z"}]}
    {:position 3
     :content
-    [{:template   "teste-4"
+    [{:template   "teste-otavio-4"
       :end-date "2030-08-01T12:33:53.475Z"}]}]}}
+
+ {:customer-id "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
+  :slots
+  [{:position 1
+    :content
+    [{:template   "teste-otavio"
+      :eligibilities []
+      :source "purple-loop"
+      :flow-id "flow-id-1"
+      :start-date "2024-04-24T00:00:00.0Z"
+      :end-date   "2030-08-01T12:33:53.475Z"}]}]}
       
 [{:widget-id "template-1" ...}
  {:widget-id "template-2" ...}
  {:widget-id "template-3" ...}]
 
 
- {:customer--id             "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
+ {:customer--id             ""
    :eligibility-name        "investments-backed-loan"
    :is-eligible              true
    :status                   "active"
@@ -142,7 +169,6 @@
      [{:template   "teste-otavio-2"
        :eligibility "personal-loan"
        :end-date "2030-08-01T12:33:53.475Z"}]}]}}
-       991484138
 
 
 {:customer-id             "59f08dd1-2a29-4cc8-8f53-72b6bac7f59f"
@@ -155,4 +181,7 @@
 :eligibility-name         "home-insurance"
 :is-eligible              true
 :status                   :active
-:produced-at              "2024-07-26T08:00:53.475Z"}
+:produced-at              "2024-09-24T08:00:53.475Z"}
+
+
+171160950

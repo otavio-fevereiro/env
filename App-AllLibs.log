@@ -1,0 +1,10 @@
+Command line invocation:
+    /Applications/Xcode-16.4.0.app/Contents/Developer/usr/bin/xcodebuild -workspace ../native/ios/iOS.xcworkspace -scheme AllLibs -configuration Release -derivedDataPath /Users/otavio.fevereiro/.xcodebuild_cache/iOS -destination "generic/platform=iOS Simulator" COMPILER_INDEX_STORE_ENABLE=NO build CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO
+
+Build settings from command line:
+    CODE_SIGN_ENTITLEMENTS = 
+    CODE_SIGN_IDENTITY = 
+    CODE_SIGNING_ALLOWED = NO
+    CODE_SIGNING_REQUIRED = NO
+    COMPILER_INDEX_STORE_ENABLE = NO
+

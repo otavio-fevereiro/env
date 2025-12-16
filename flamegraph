@@ -1,0 +1,4 @@
+#nu aws credentials refresh --npm-login
+#nu aws shared-role-credentials refresh -i
+nu k8s flamegraph s2 search-hub
+nu k8s enable-flamegraph

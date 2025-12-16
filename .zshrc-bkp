@@ -1,22 +1,7 @@
-# {mark} START IT-ENG JAMF SETUP ZSHRC
-source $HOME/.nurc
-export NU_HOME="$HOME/dev/nu"
+#{mark} START CUSTOM
+export GPG_TTY=$(tty)
 export MMR="$NU_HOME/mini-meta-repo"
 export ENV="$NU_HOME/env"
-export GOPATH="${NU_HOME}/go"
-export PATH="$GOPATH/bin:${PATH}"
-export MONOREPO_ROOT="$NU_HOME/mini-meta-repo"
-export PATH="$PATH:$MONOREPO_ROOT/monocli/bin"
-export FLUTTER_ROOT="$HOME/sdk-flutter/"
-export PATH="$PATH:$FLUTTER_ROOT/bin"
-export PATH="$PATH:$HOME/.pub-cache/bin"
-export FLUTTER_PLATFORM_CLIENT_ENV=staging
-export PATH="$PATH:$HOME/android_sdk/cmdline-tools/latest/bin/"
-export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
-export JAVA_HOME=`/usr/libexec/java_home -v 11.0.19`
-eval "$(rbenv init -)"
-# {mark} END IT-ENG JAMF SETUP ZSHRC
-
 alias hover="source $ENV/hover.sh"
 alias stormguild="source $ENV/stormguild-mock.sh"
 alias flutter-d="source $ENV/flutter-desktop.sh"
@@ -25,6 +10,4 @@ alias flutter-d-s="open -a Terminal $ENV/stormguild-mock.sh &&
 alias cid="nu cus cpf 39570682825"
 alias update-credentials="source $ENV/update-credentials.sh"
 alias git-commit-empty="git commit --allow-empty -m \"Empty commit\""
-
-
-export PATH="/opt/homebrew/bin:$PATH"
+#{mark} END CUSTOM

@@ -1,0 +1,207 @@
+Command line invocation:
+    /Applications/Xcode-16.2.0.app/Contents/Developer/usr/bin/xcodebuild -workspace ../native/ios/iOS.xcworkspace -scheme AllLibs -configuration Release -derivedDataPath /Users/otavio.fevereiro/.xcodebuild_cache/iOS -destination "generic/platform=iOS Simulator" COMPILER_INDEX_STORE_ENABLE=NO build CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS= CODE_SIGNING_ALLOWED=NO
+
+User defaults from command line:
+    IDEDerivedDataPathOverride = /Users/otavio.fevereiro/.xcodebuild_cache/iOS
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Build settings from command line:
+    CODE_SIGN_ENTITLEMENTS = 
+    CODE_SIGN_IDENTITY = 
+    CODE_SIGNING_ALLOWED = NO
+    CODE_SIGNING_REQUIRED = NO
+    COMPILER_INDEX_STORE_ENABLE = NO
+
+Prepare packages
+
+note: Using codesigning identity override: 
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (28 targets)
+    Target 'Shell' in project 'Shell'
+        ➜ Implicit dependency on target 'ShellCommon' in project 'Shell' via file 'ShellCommon.framework' in build phase 'Link Binary'
+        ➜ Implicit dependency on target 'Common' in project 'Common' via file 'Common.framework' in build phase 'Link Binary'
+        ➜ Implicit dependency on target 'CommonSwift' in project 'CommonSwift' via file 'CommonSwift.framework' in build phase 'Link Binary'
+        ➜ Implicit dependency on target 'Core' in project 'Core' via file 'Core.framework' in build phase 'Link Binary'
+    Target 'ShellCommon' in project 'Shell'
+        ➜ Implicit dependency on target 'Core' in project 'Core' via file 'Core.framework' in build phase 'Link Binary'
+    Target 'CommonTestable' in project 'Common'
+        ➜ Explicit dependency on target 'Common' in project 'Common'
+        ➜ Implicit dependency on target 'Pods-CommonTestable' in project 'Pods' via file 'libPods-CommonTestable.a' in build phase 'Link Binary'
+        ➜ Implicit dependency on target 'OCMock' in project 'Pods' via options '-lOCMock' in build setting 'OTHER_LDFLAGS'
+    Target 'Pods-CommonTestable' in project 'Pods'
+        ➜ Explicit dependency on target 'OCMock' in project 'Pods'
+    Target 'OCMock' in project 'Pods' (no dependencies)
+    Target 'Common' in project 'Common'
+        ➜ Implicit dependency on target 'Core' in project 'Core' via file 'Core.framework' in build phase 'Link Binary'
+        ➜ Implicit dependency on target 'CommonSwift' in project 'CommonSwift' via file 'CommonSwift.framework' in build phase 'Link Binary'
+        ➜ Implicit dependency on target 'Pods-Common' in project 'Pods' via file 'libPods-Common.a' in build phase 'Link Binary'
+        ➜ Implicit dependency on target 'DZNEmptyDataSet' in project 'Pods' via options '-lDZNEmptyDataSet' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'FMDB' in project 'Pods' via options '-lFMDB' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'INTULocationManager' in project 'Pods' via options '-lINTULocationManager' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'Mantle' in project 'Pods' via options '-lMantle' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'Masonry' in project 'Pods' via options '-lMasonry' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'NUAnimationKit' in project 'Pods' via options '-lNUAnimationKit' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'SVProgressHUD' in project 'Pods' via options '-lSVProgressHUD' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'TTTAttributedLabel' in project 'Pods' via options '-lTTTAttributedLabel' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'UICKeyChainStore' in project 'Pods' via options '-lUICKeyChainStore' in build setting 'OTHER_LDFLAGS'
+    Target 'Pods-Common' in project 'Pods'
+        ➜ Explicit dependency on target 'DZNEmptyDataSet' in project 'Pods'
+        ➜ Explicit dependency on target 'FMDB' in project 'Pods'
+        ➜ Explicit dependency on target 'INTULocationManager' in project 'Pods'
+        ➜ Explicit dependency on target 'Mantle' in project 'Pods'
+        ➜ Explicit dependency on target 'Masonry' in project 'Pods'
+        ➜ Explicit dependency on target 'NUAnimationKit' in project 'Pods'
+        ➜ Explicit dependency on target 'SVProgressHUD' in project 'Pods'
+        ➜ Explicit dependency on target 'TTTAttributedLabel' in project 'Pods'
+        ➜ Explicit dependency on target 'UICKeyChainStore' in project 'Pods'
+    Target 'UICKeyChainStore' in project 'Pods' (no dependencies)
+    Target 'TTTAttributedLabel' in project 'Pods' (no dependencies)
+    Target 'SVProgressHUD' in project 'Pods' (no dependencies)
+    Target 'NUAnimationKit' in project 'Pods' (no dependencies)
+    Target 'Masonry' in project 'Pods' (no dependencies)
+    Target 'Mantle' in project 'Pods' (no dependencies)
+    Target 'INTULocationManager' in project 'Pods' (no dependencies)
+    Target 'FMDB' in project 'Pods' (no dependencies)
+    Target 'DZNEmptyDataSet' in project 'Pods' (no dependencies)
+    Target 'CoreTestable' in project 'Core'
+        ➜ Explicit dependency on target 'Core' in project 'Core'
+    Target 'CommonSwiftTestable' in project 'CommonSwift'
+        ➜ Explicit dependency on target 'CommonSwift' in project 'CommonSwift'
+    Target 'CommonSwift' in project 'CommonSwift'
+        ➜ Implicit dependency on target 'Core' in project 'Core' via file 'Core.framework' in build phase 'Link Binary'
+        ➜ Implicit dependency on target 'Pods-CommonSwift' in project 'Pods' via file 'libPods-CommonSwift.a' in build phase 'Link Binary'
+        ➜ Implicit dependency on target 'MZAppearance' in project 'Pods' via options '-lMZAppearance' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'MZFormSheetPresentationController' in project 'Pods' via options '-lMZFormSheetPresentationController' in build setting 'OTHER_LDFLAGS'
+        ➜ Implicit dependency on target 'lottie-ios' in project 'Pods' via options '-llottie-ios' in build setting 'OTHER_LDFLAGS'
+    Target 'Pods-CommonSwift' in project 'Pods'
+        ➜ Explicit dependency on target 'MZAppearance' in project 'Pods'
+        ➜ Explicit dependency on target 'MZFormSheetPresentationController' in project 'Pods'
+        ➜ Explicit dependency on target 'lottie-ios' in project 'Pods'
+    Target 'lottie-ios' in project 'Pods' (no dependencies)
+    Target 'MZFormSheetPresentationController' in project 'Pods'
+        ➜ Explicit dependency on target 'MZAppearance' in project 'Pods'
+    Target 'MZAppearance' in project 'Pods' (no dependencies)
+    Target 'Core' in project 'Core'
+        ➜ Implicit dependency on target 'Pods-Core' in project 'Pods' via file 'libPods-Core.a' in build phase 'Link Binary'
+        ➜ Implicit dependency on target 'Amplitude-iOS' in project 'Pods' via options '-lAmplitude-iOS' in build setting 'OTHER_LDFLAGS'
+    Target 'Pods-Core' in project 'Pods'
+        ➜ Explicit dependency on target 'Amplitude-iOS' in project 'Pods'
+        ➜ Explicit dependency on target 'AppsFlyerFramework' in project 'Pods'
+    Target 'AppsFlyerFramework' in project 'Pods'
+        ➜ Explicit dependency on target 'AppsFlyerFramework-AppsFlyerLib_Privacy' in project 'Pods'
+    Target 'AppsFlyerFramework-AppsFlyerLib_Privacy' in project 'Pods' (no dependencies)
+    Target 'Amplitude-iOS' in project 'Pods' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode-16.2.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch arm64 -isysroot /Applications/Xcode-16.2.0.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.2.sdk -x objective-c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode-16.2.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode-16.2.0.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.2.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode-16.2.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch arm64 -isysroot /Applications/Xcode-16.2.0.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.2.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode-16.2.0.app/Contents/Developer/usr/bin/ibtool --version --output-format xml1
+
+ExecuteExternalTool /Applications/Xcode-16.2.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool -V
+
+ExecuteExternalTool /Applications/Xcode-16.2.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode-16.2.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch x86_64 -isysroot /Applications/Xcode-16.2.0.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.2.sdk -x objective-c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode-16.2.0.app/Contents/Developer/usr/bin/actool --version --output-format xml1
+
+ExecuteExternalTool /Applications/Xcode-16.2.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+ExecuteExternalTool /Applications/Xcode-16.2.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch x86_64 -isysroot /Applications/Xcode-16.2.0.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.2.sdk -x c -c /dev/null
+
+Build description signature: 3d1103ee3bab9032443251201c87758b
+Build description path: /Users/otavio.fevereiro/.xcodebuild_cache/iOS/Build/Intermediates.noindex/XCBuildData/3d1103ee3bab9032443251201c87758b.xcbuilddata
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'AppsFlyerFramework' from project 'Pods')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'Pods-Common' from project 'Pods')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'UICKeyChainStore' from project 'Pods')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'DZNEmptyDataSet' from project 'Pods')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'Pods-CommonSwift' from project 'Pods')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'lottie-ios' from project 'Pods')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'Shell' from project 'Shell')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/BranchSDK.xcframework'. (in target 'Shell' from project 'Shell')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/TMXProfiling.xcframework'. (in target 'Shell' from project 'Shell')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/TMXProfilingConnections.xcframework'. (in target 'Shell' from project 'Shell')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'ShellCommon' from project 'Shell')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/RxSwift.xcframework'. (in target 'ShellCommon' from project 'Shell')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/RxCocoa.xcframework'. (in target 'ShellCommon' from project 'Shell')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/BranchSDK.xcframework'. (in target 'Core' from project 'Core')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/RxSwift.xcframework'. (in target 'Core' from project 'Core')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/FBSDKShareKit.xcframework'. (in target 'Core' from project 'Core')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/FBSDKCoreKit.xcframework'. (in target 'Core' from project 'Core')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/RxRelay.xcframework'. (in target 'Core' from project 'Core')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/FBAEMKit.xcframework'. (in target 'Core' from project 'Core')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/RxCocoa.xcframework'. (in target 'Core' from project 'Core')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/FBSDKCoreKit_Basics.xcframework'. (in target 'Core' from project 'Core')
+/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/ios-core/Core.xcodeproj: warning: tasks in 'Copy Headers' are delayed by unsandboxed script phases; set ENABLE_USER_SCRIPT_SANDBOXING=YES to enable sandboxing (in target 'Core' from project 'Core')
+warning: Run script build phase 'Fix Apollo library' will be run during every build because it does not specify any outputs. To address this issue, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'Core' from project 'Core')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'CoreTestable' from project 'Core')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/Nimble.xcframework'. (in target 'CoreTestable' from project 'Core')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/SwiftCheck.xcframework'. (in target 'CoreTestable' from project 'Core')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/OHHTTPStubs.xcframework'. (in target 'CoreTestable' from project 'Core')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/RxRelay.xcframework'. (in target 'CoreTestable' from project 'Core')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/RxSwift.xcframework'. (in target 'CoreTestable' from project 'Core')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/RxTest.xcframework'. (in target 'CoreTestable' from project 'Core')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/RxBlocking.xcframework'. (in target 'CoreTestable' from project 'Core')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/OHHTTPStubs.xcframework'. (in target 'CoreTestable' from project 'Core')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/SwiftCheck.xcframework'. (in target 'CoreTestable' from project 'Core')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/RxBlocking.xcframework'. (in target 'CoreTestable' from project 'Core')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/RxRelay.xcframework'. (in target 'CoreTestable' from project 'Core')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/RxSwift.xcframework'. (in target 'CoreTestable' from project 'Core')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/Nimble.xcframework'. (in target 'CoreTestable' from project 'Core')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/RxTest.xcframework'. (in target 'CoreTestable' from project 'Core')
+/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/ios-common-legacy/Common.xcodeproj: warning: tasks in 'Copy Headers' are delayed by unsandboxed script phases; set ENABLE_USER_SCRIPT_SANDBOXING=YES to enable sandboxing (in target 'Common' from project 'Common')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'MZAppearance' from project 'Pods')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'INTULocationManager' from project 'Pods')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/FBSDKCoreKit.xcframework'. (in target 'CommonSwift' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/RxCocoa.xcframework'. (in target 'CommonSwift' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/FBSDKShareKit.xcframework'. (in target 'CommonSwift' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/FBAEMKit.xcframework'. (in target 'CommonSwift' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/RxSwift.xcframework'. (in target 'CommonSwift' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/FBSDKCoreKit_Basics.xcframework'. (in target 'CommonSwift' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/RxRelay.xcframework'. (in target 'CommonSwift' from project 'CommonSwift')
+/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/ios-common/CommonSwift.xcodeproj: warning: tasks in 'Copy Headers' are delayed by unsandboxed script phases; set ENABLE_USER_SCRIPT_SANDBOXING=YES to enable sandboxing (in target 'CommonSwift' from project 'CommonSwift')
+warning: Run script build phase 'GYB' will be run during every build because it does not specify any outputs. To address this issue, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CommonSwift' from project 'CommonSwift')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'FMDB' from project 'Pods')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'AppsFlyerFramework-AppsFlyerLib_Privacy' from project 'Pods')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'Amplitude-iOS' from project 'Pods')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'TTTAttributedLabel' from project 'Pods')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'Mantle' from project 'Pods')
+/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/ios-common-legacy/Common.xcodeproj: warning: tasks in 'Copy Headers' are delayed by unsandboxed script phases; set ENABLE_USER_SCRIPT_SANDBOXING=YES to enable sandboxing (in target 'CommonTestable' from project 'Common')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'MZFormSheetPresentationController' from project 'Pods')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'NUAnimationKit' from project 'Pods')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'CommonSwiftTestable' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/FBSDKShareKit.xcframework'. (in target 'CommonSwiftTestable' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/OHHTTPStubs.xcframework'. (in target 'CommonSwiftTestable' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/RxSwift.xcframework'. (in target 'CommonSwiftTestable' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/FBSDKCoreKit.xcframework'. (in target 'CommonSwiftTestable' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/SwiftCheck.xcframework'. (in target 'CommonSwiftTestable' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/FBAEMKit.xcframework'. (in target 'CommonSwiftTestable' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/KIFFramework.xcframework'. (in target 'CommonSwiftTestable' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/FBSDKCoreKit_Basics.xcframework'. (in target 'CommonSwiftTestable' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/Nimble.xcframework'. (in target 'CommonSwiftTestable' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/RxCocoa.xcframework'. (in target 'CommonSwiftTestable' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/RxRelay.xcframework'. (in target 'CommonSwiftTestable' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/FBSDKShareKit.xcframework'. (in target 'CommonSwiftTestable' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/OHHTTPStubs.xcframework'. (in target 'CommonSwiftTestable' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/RxSwift.xcframework'. (in target 'CommonSwiftTestable' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/FBSDKCoreKit.xcframework'. (in target 'CommonSwiftTestable' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/SwiftCheck.xcframework'. (in target 'CommonSwiftTestable' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/FBAEMKit.xcframework'. (in target 'CommonSwiftTestable' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/KIFFramework.xcframework'. (in target 'CommonSwiftTestable' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/FBSDKCoreKit_Basics.xcframework'. (in target 'CommonSwiftTestable' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/Nimble.xcframework'. (in target 'CommonSwiftTestable' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/RxCocoa.xcframework'. (in target 'CommonSwiftTestable' from project 'CommonSwift')
+error: There is no XCFramework found at '/Users/otavio.fevereiro/dev/nu/mini-meta-repo/native/ios/Carthage/Build/RxRelay.xcframework'. (in target 'CommonSwiftTestable' from project 'CommonSwift')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'OCMock' from project 'Pods')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'SVProgressHUD' from project 'Pods')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'Pods-CommonTestable' from project 'Pods')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'Masonry' from project 'Pods')
+note: Disabling previews because SWIFT_VERSION is set and SWIFT_OPTIMIZATION_LEVEL=-O, expected -Onone (in target 'Pods-Core' from project 'Pods')

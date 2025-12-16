@@ -1,13 +1,15 @@
 //K8s
 nu k8s get pods s8 ahorita --env prod
 
-nu k8s keda configure s18 marca-texto --min-size 8 --max-size 8 --iam
+nu k8s keda configure s0 ahorita --min-size 8 --max-size 8
 
-nu on-shards run -- k8s keda configure % marca-texto  --min-size 3 --max-size 8 -y
+nu on-shards run -- k8s keda configure % eligibility-consumers  --min-size 10 --max-size 10 -y
 
 nu k8s change-resources --stack-id green s15 marca-texto --limit-cpu 6 --request-cpu 6  --country br
-nu on-shards run -- k8s change-resources --stack-id green % marca-texto --limit-cpu 6 --request-cpu 6 --country br -y
 
+nu on-shards run -- k8s change-resources --stack-id green % ahorita --limit-cpu 6 --request-cpu 6 --country br -y
+
+nu-br on-shards run -- k8s cycle % ahorita 
 
 
 nu k8s configure s0
@@ -42,9 +44,9 @@ nu aws shared-role-credentials web-console --account-alias=br-staging
 
 nu-br-staging k8s logs s0 ahorita --pod staging-s0-green-ahorita-deployment-7fb74dc6c7-552sd
 
-nu-br-staging sec iam show  
-nu-br-staging auth get-refresh-token --env staging
-nu aws shared-role-credentials refresh -i
-nu aws credentials refresh --aws-account='br-staging-staging'
-nu aws credentials refresh --aws-account br-staging-staging
-https://nubank.atlassian.net/servicedesk/customer/portal/131/group/679/create/9937
+https://nubank.atlassian.net/servicedesk/customer/portal/131/create/2239
+eks
+user-admin-br
+
+
+

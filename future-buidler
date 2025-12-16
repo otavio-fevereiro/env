@@ -1,0 +1,405 @@
+import 'package:analytics/analytics.dart';
+import 'package:app_config/app_config.dart';
+import 'package:catalyst_components/catalyst_components.dart';
+import 'package:catalyst_core/catalyst_core.dart';
+import 'package:catalyst_remote_client/catalyst_remote_client.dart';
+import 'package:common_multiplatform/common_multiplatform.dart';
+import 'package:common_widgets/common_widgets.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/material.dart' hide Text;
+import 'package:nuds_sharp/nuds_sharp.dart';
+import 'package:open_telemetry/open_telemetry.dart';
+import 'package:provider/provider.dart';
+import 'package:screen_analytics/screen_analytics.dart';
+
+import '../../catalyst_entrypoint.dart';
+import '../data/analytics/catalyst_analytics_extensions.dart';
+import '../data/analytics/tracer_controller_provider_rollout.dart';
+import '../default_native_context_exception_handler.dart';
+import '../utils/stopwatch_controller.dart';
+import '../utils/variant_conversion_helper.dart';
+import 'expression_fetcher.dart';
+import 'parsed_expr_analytics_wrapper.dart';
+
+typedef RetryCallback = void Function();
+typedef ErrorCallback = Widget? Function(
+  BuildContext context,
+  Object error,
+  RetryCallback? retry,
+);
+
+typedef AsyncErrorCallback = void Function(
+  BuildContext context,
+  Object error,
+);
+
+const catalystExprRoute = 'bdc/:provider/expr/:exprId';
+
+/// [CatalystEntrypointBuilder] is responsible for fetching data using a
+/// [IFogWallClient] and handle any error sending analytics if needed.
+///
+/// On success it pushes a new route to the navigation with the result of the
+/// [CatalystExprParser.parse].
+///
+/// On error it may silently pop the route or show a generic error with the
+/// possibility of trying to fetch data from [FogWallClient] again.
+@visibleForTesting
+class CatalystEntrypointBuilder extends StatefulWidget {
+  CatalystEntrypointBuilder({
+    Key? key,
+    required this.provider,
+    required this.exprId,
+    required this.parameters,
+    ConnectionInfo? connectivity,
+    required this.onLoading,
+    required this.onError,
+    this.onAsyncError,
+    required this.exprType,
+    this.extraGlobalVars = const {},
+    this.exprBuilder,
+    this.baseEvaluationContext,
+    CatalystStackTrace? stackTrace,
+  })  : _stackTrace = stackTrace ?? CatalystStackTrace(),
+        connectivity =
+            connectivity ?? ConnectionInfoBuilder(connectivity: Connectivity()),
+        super(key: key);
+
+  final ConnectionInfo connectivity;
+  final CatalystStackTrace? _stackTrace;
+
+  final EvaluationContext<NativeContext>? baseEvaluationContext;
+  final String provider;
+  final String exprId;
+  final Map<String, dynamic> parameters;
+  final ExprType exprType;
+  final Widget Function(BuildContext) onLoading;
+  final ErrorCallback onError;
+  final AsyncErrorCallback? onAsyncError;
+  final Map<String, RTValue<NativeContext>> extraGlobalVars;
+  final Widget Function(RTValue<NativeContext>)? exprBuilder;
+
+  @override
+  _CatalystEntrypointBuilderState createState() =>
+      _CatalystEntrypointBuilderState();
+}
+
+class _CatalystEntrypointBuilderState extends State<CatalystEntrypointBuilder> {
+  String? _loadedExprId;
+  String? _loadedProvider;
+  Future<Widget?>? _fetchFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchFuture = _fetchAndBuildCatalystScreen(
+      context,
+      stopwatchController: StopwatchController.of(context),
+    );
+  }
+
+  @override
+  void didUpdateWidget(CatalystEntrypointBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (_hasChangedProviderOrExpr()) {
+      _fetchFuture = _fetchAndBuildCatalystScreen(
+        context,
+        stopwatchController: StopwatchController.of(context),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: _fetchFuture,
+      builder: (context, snapshot) {
+        print('to passando aqui hahahahahahaha');
+        if (isReloading(context) ||
+            snapshot.data == null ||
+            _hasChangedProviderOrExpr()) {
+          _saveExprInHistory(context);
+          final stopwatchController = StopwatchController.of(context);
+          stopwatchController?.stopAndResetAll();
+          _fetchAndBuildCatalystScreen(
+            context,
+            stopwatchController: stopwatchController,
+          );
+          return widget.onLoading(context);
+        } else {
+          return snapshot.data ?? widget.onLoading(context);
+        }
+      },
+    );
+  }
+
+  void _saveExprInHistory(BuildContext context) {
+    if (bdcExpressionHistoryEnabled(IAppConfig.of(context))) {
+      final bdcExpressionsHistory = Provider.of<BdcExpressionsHistory>(context);
+      bdcExpressionsHistory.exprList.add(ExprData(
+          provider: widget.provider,
+          exprId: widget.exprId,
+          screenParams: widget.parameters));
+    }
+  }
+
+  bool isReloading(BuildContext context) {
+    final bdcWidgetReloader = _watchBdcWidgetReloader(context);
+    return bdcWidgetReloader?.isReloading == true;
+  }
+
+  BdcWidgetReloader? _readBdcWidgetReloader(BuildContext context) =>
+      _bdcWidgetReloader(context, listen: false);
+
+  BdcWidgetReloader? _watchBdcWidgetReloader(BuildContext context) =>
+      _bdcWidgetReloader(context, listen: true);
+
+  BdcWidgetReloader? _bdcWidgetReloader(
+    BuildContext context, {
+    required bool listen,
+  }) {
+    try {
+      return Provider.of<BdcWidgetReloader>(context, listen: listen);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  bool _hasChangedProviderOrExpr() {
+    return widget.exprId != _loadedExprId || widget.provider != _loadedProvider;
+  }
+
+  Future<Widget?> _fetchAndBuildCatalystScreen(
+    BuildContext context, {
+    required StopwatchController? stopwatchController,
+  }) async {
+    Widget? parsedComponent;
+
+    if (!_hasChangedProviderOrExpr()) return null;
+
+    final timeToFullDisplayLogger = ITimeToFullDisplayLogger.of(context);
+    final loadingData = LoadingData(
+      metricName: '${widget.provider}.${widget.exprId}',
+      loadingType: LoadingType.bdcExpr,
+    );
+    timeToFullDisplayLogger?.startLoading(loadingData);
+    final exprParser = _exprParser(context);
+
+    final appConfig = IAppConfig.of(context);
+    final analytics = Analytics.of(context);
+    final tracer = getTracerOf(context, analytics);
+    final tracerController = TracerController(tracer, appConfig);
+
+    tracerController.startRenderSpan();
+    final timeToRenderNotifier = ITimeToRenderNotifier.maybeOf(context);
+    timeToRenderNotifier?.onStart();
+    stopwatchController?.timeToRenderStopwatch.resetAndStart();
+
+    _loadedExprId = widget.exprId;
+    _loadedProvider = widget.provider;
+
+    _sendDeeplinkOpenedAnalytics(appConfig: appConfig, analytics: analytics);
+
+    final challengeObserver = IChallengeObserver.of(context);
+    final bdcWidgetReloader = _readBdcWidgetReloader(context);
+    final catalystProvider = CatalystProvider.of(context);
+
+    bool? isAuthenticated;
+
+    if (appConfig.isVariantConversionEnabled()) {
+      isVariantToRTValueDartPrimitiveEnabled = true;
+    }
+
+    try {
+      final fogWallClient = context.read<IPreFetcherBdcClient>();
+      final cacheManager = ICatalystCacheManager.of(context);
+      isAuthenticated = await isAuthenticatedBoundaryInfo(
+        platformClient: context.read<IPlatformClient>(),
+        appConfig: appConfig,
+      );
+      final response = await fetchCatalystExpr(
+        provider: widget.provider,
+        exprId: widget.exprId,
+        parameters: widget.parameters,
+        exprType: widget.exprType,
+        screenParams: parametersWithoutLocal(
+          parameters: widget.parameters,
+          analytics: analytics,
+        ),
+        fogWallClient: fogWallClient,
+        analytics: analytics,
+        appConfig: appConfig,
+        catalystProvider: catalystProvider,
+        cacheManager: cacheManager,
+        challengeObserver: challengeObserver,
+        stopwatchController: stopwatchController,
+        tracerController: tracerController,
+      );
+      tracerController.addRenderSpanAttributes(
+        preFetchUsed: stopwatchController?.hasPreFetch,
+        preFetchFinished: stopwatchController?.preFetchFinished,
+      );
+      tracerController.startInterpretSpan();
+      stopwatchController?.timeToInterpretStopwatch.resetAndStart();
+
+      final catalystWidget = exprParser.parse(
+        response,
+        stopwatchController: stopwatchController,
+        exprBuilder: widget.exprBuilder,
+        baseEvaluationContext: widget.baseEvaluationContext,
+        tracerController: tracerController,
+      );
+
+      final tracerControllerProviderEnabled =
+          isTracerControllerProviderEnabled(appConfig);
+
+      parsedComponent = _wrapWithIsUserAuthenticatedBoundary(
+        MultiProvider(
+          providers: [
+            if (tracerControllerProviderEnabled)
+              Provider<IRenderExprTracer>.value(value: tracerController),
+            Provider<ErrorHandlingProvider>(
+              create: (_) => ErrorHandlingProvider(
+                onError: (context, error) => () {
+                  parsedComponent = widget.onError(context, error, null);
+                },
+                onAsyncError: _onAsyncError,
+              ),
+            )
+          ],
+          child: ParsedExprAnalyticsWrapper(
+            exprWidget: catalystWidget,
+            stopwatchController: stopwatchController,
+            loadingData: loadingData,
+            connectivity: widget.connectivity,
+            exprType: widget.exprType,
+            tracerController: tracerController,
+          ),
+        ),
+        isUserAuthenticated: isAuthenticated,
+      );
+    } catch (error, stackTrace) {
+      final hasChallenge = challengeObserver?.hasChallenge ?? false;
+      sendExceptionAnalytics(
+        error,
+        dartStackTrace: stackTrace,
+        exprId: widget.exprId,
+        provider: widget.provider,
+        errorContext: BdcErrorContext.request,
+        analytics: analytics,
+        appConfig: appConfig,
+        timeToFullDisplayLogger: timeToFullDisplayLogger,
+        isUserAuthenticated: isAuthenticated,
+        otherLogProperties: <String, dynamic>{
+          'is_mounted': mounted.toString(),
+          'has_challenge': hasChallenge,
+        },
+        isRemoteExpr: false,
+      );
+      // ignore: use_build_context_synchronously
+      parsedComponent = widget.onError(context, error, _retry);
+      tracerController.recordRenderException(error);
+    } finally {
+      bdcWidgetReloader?.finishReload();
+    }
+
+    return parsedComponent;
+  }
+
+  CatalystExprParser _exprParser(BuildContext context) {
+    final appConfig = IAppConfig.of(context);
+    final stackTrace = widget._stackTrace;
+    final experimentConfigEnabled = appConfig.isEnabled(
+      'enable_extra_bdc_components_provider',
+    );
+
+    final legacyNuDSProvider = experimentConfigEnabled
+        ? context.read<LegacyNuDSParsersProvider?>()
+        : null;
+    return CatalystExprParser(
+      config: createParserConfig(
+        widget.exprId,
+        widget.provider,
+        stackTrace: stackTrace,
+        legacyNuDSParsersProvider: legacyNuDSProvider,
+      ),
+      extraGlobalVars: widget.extraGlobalVars,
+    );
+  }
+
+  void _onAsyncError(BuildContext context, Object error) {
+    final onAsyncError =
+        widget.onAsyncError ?? ErrorHandlingProvider.defaultOnAsyncError;
+    onAsyncError(context, error);
+  }
+
+  void _sendDeeplinkOpenedAnalytics({
+    required IAppConfig appConfig,
+    required Analytics analytics,
+  }) {
+    analytics.sendDeepLinkOpenedEvent(
+      catalystExprRoute,
+      properties: <String, dynamic>{
+        'expr_type': widget.exprType.value,
+      },
+    );
+    analytics.sendDeepLinkOpenedMetric(
+      catalystExprRoute,
+      properties: <String, String>{
+        'expr_type': widget.exprType.value,
+      },
+    );
+  }
+
+  void _retry() {
+    if (!mounted) return;
+    ITimeToFullDisplayLogger.of(context)?.reset();
+  }
+
+  Widget _wrapWithIsUserAuthenticatedBoundary(
+    Widget widget, {
+    required bool? isUserAuthenticated,
+  }) {
+    if (isUserAuthenticated == null) {
+      return widget;
+    }
+    return Boundary(
+      info: [
+        CustomProperties(
+          {'is_authenticated': '$isUserAuthenticated'},
+        ),
+      ],
+      child: widget,
+    );
+  }
+}
+
+ITracer? getTracerOf(BuildContext context, Analytics analytics) {
+  try {
+    return Provider.of<AppOpenTelemetry>(context, listen: false).tracer;
+  } catch (e) {
+    analytics.sendGetTracerOfContextFailedLog(e);
+    return null;
+  }
+}
+
+Future<bool?> isAuthenticatedBoundaryInfo({
+  required IPlatformClient platformClient,
+  required IAppConfig appConfig,
+}) async {
+  if (!bdcIsAuthenticatedBoundaryInfoEnabled(appConfig)) {
+    return null;
+  }
+  try {
+    return await platformClient.userIsAuthenticated;
+  } catch (_) {
+    return null;
+  }
+}
+
+bool bdcIsAuthenticatedBoundaryInfoEnabled(IAppConfig appConfig) {
+  return appConfig.get(
+        'bdc_is_authenticated_boundary_info_enabled',
+        defaultValue: 'false',
+      ) ==
+      'true';
+}
